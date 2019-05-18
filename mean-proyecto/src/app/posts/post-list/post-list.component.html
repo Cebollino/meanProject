@@ -1,0 +1,11 @@
+<table id="post-table">
+    <tr>
+        <td>Title</td>
+        <td>Amount</td>
+    </tr>
+
+    <tr *ngFor= "let post of posts">
+        <td>{{post.title}}</td>
+        <td>{{post.amount}}</td>
+    </tr>
+</table>

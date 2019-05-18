@@ -1,8 +1,32 @@
-<mat-card>
-    <mat-form-field>
-        <textarea matInput rows="10" [(ngModel)]="enteredValue"></textarea>
-        <br>
-    </mat-form-field>
-</mat-card>
-<button (click)="onAddPost()">Submit</button>
-        <p>{{ newPost }}</p>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            Create post
+        </h3>
+    </div>
+    <div class="card-body">
+        <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+            <div class="form-input">
+                <label for="title">Insert title</label>
+                <input 
+                id="title" name="title"
+                rows="10" ngModel 
+                #title="ngModel" class="form-control"
+                required type="text"/>
+                <div *ngIf="title.invalid" class="invalid-feedback">Invalid input</div>
+            </div>
+            <div class="form-input">
+                <label for="amount">Insert amount</label>
+                <input 
+                type="text" id="amount" 
+                name="amount" class="form-control"
+                ngModel #amount="ngModel"
+                required />
+                <div *ngIf="amount.invalid" class="invalid-feedback">Invalid input</div>
+            </div>    
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
