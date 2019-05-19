@@ -9,7 +9,7 @@ const schMesa = mongoose.Schema({
     id_camarero: {
         type: String,
         required: true,
-        maxlength: 2
+        maxlength: 20
     },
     estado: {
       type: String,

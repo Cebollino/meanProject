@@ -6,6 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { ListarCamareroComponent } from './secciones/camareros/listar-camarero/listar-camareros.component';
 import { CrearCamareroComponent } from './secciones/camareros/crear-camarero/crear-camarero.component';
 import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.component'
+import { CrearMesaComponent } from './secciones/mesas/crear-mesa/crear-mesa.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +29,10 @@ const routes: Routes = [
   {
     path: 'listMesas',
     component: ListarMesaComponent
+  },
+  {
+    path: 'addMEsa',
+    component: CrearMesaComponent
   }
 ]
 

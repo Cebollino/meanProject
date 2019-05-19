@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const Camarero = require("./models/camarero")
-
+const Mesa = require('./models/mesa')
 const app = express()
 
 mongoose.connect("mongodb+srv://albert:RAMFrodo871@cluster0-kceiu.mongodb.net/dishup?retryWrites=true")
@@ -52,6 +52,31 @@ app.get('/api/camareros' , (req, res, next) => {
             camareros: documents
         })
     })
+
+})
+
+app.post("/api/mesas", (req, res, next) => {
+  const mesa = new Mesa({
+    id_sesion: Math.floor(Math.random() * (10000 - 10) + 10) + "-" + req.body.id_camarero,
+    id_camarero: req.body.id_camarero,
+    estado: req.body.estado,
+  })
+  console.log(req.body)
+  console.log("asdasdsadasd")
+  mesa.save()
+  res.status(201).json({
+      message: "mesa add"
+  })
+})
+
+app.get('/api/mesas' , (req, res, next) => {
+  Mesa.find().then(documents => {
+      console.log(documents)
+      res.status(200).json({
+          message: "get de mesas",
+          mesas: documents
+      })
+  })
 
 })
 

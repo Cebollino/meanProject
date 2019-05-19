@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Formulario para añadir mesas</h3>
+      </div>
+      <div class="card-body">
+        <form (submit)="onAddMesa(formMesa)" #formMesa="ngForm">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="id_camarero">Camarero</label>
+                <select class="form-control"
+                id="id_camarero" name="id_camarero"
+                #id_camarero="ngModel" ngModel
+                required>
+                  <option value="esto es una id">Aqui va la ip</option>
+                </select>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="estado">Estado</label>
+                <select class="form-control"
+                id="estado" name="estado"
+                #estado="ngModel" ngModel
+                required>
+                  <option value="ocupada">Ocupada</option>
+                  <option value="vacia">Vacia</option>
+                  <option value="por_limpiar">Por limpiar</option>
+                </select>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        </form>
+      </div>
+      <div class="card-footer">
+
+      </div>
+    </div>
+  </div>

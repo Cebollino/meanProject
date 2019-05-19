@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs'
-import { Mesa } from '../mesa.modelo'
+import { Subscription } from 'rxjs';
+import { Mesa } from '../mesa.modelo';
 import { ServicioMesa } from '../mesa.service';
 
 @Component({
@@ -9,21 +9,21 @@ import { ServicioMesa } from '../mesa.service';
 })
 
 export class ListarMesaComponent implements OnInit, OnDestroy {
-  mesas: Mesa[] = []
+  mesas: Mesa[] = [];
   private mesasSub: Subscription;
 
   constructor(public servicioMesa: ServicioMesa) {}
 
   ngOnInit() {
-      this.servicioMesa.getMesas()
+      this.servicioMesa.getMesas();
       this.mesasSub = this.servicioMesa.getMesasActualizadasListener()
-      .subscribe((mesas: Mesa[]) =>{
+      .subscribe((mesas: Mesa[]) => {
           this.mesas = mesas;
-      })
+      });
 
   }
 
   ngOnDestroy() {
-      this.mesasSub.unsubscribe()
+      this.mesasSub.unsubscribe();
   }
 }

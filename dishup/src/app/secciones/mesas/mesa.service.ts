@@ -17,10 +17,9 @@ export class ServicioMesa {
       return mesaData.mesas.map(mesa => {
         return {
           id: mesa._id,
-          nombre: mesa.nombre,
-          apellido: mesa.apellido,
-          tlfn: mesa.tlfn,
-          email: mesa.email
+          id_sesion: mesa.id_sesion,
+          id_camarero: mesa.id_camarero,
+          estado: mesa.estado,
         }
       })
     }))
@@ -34,11 +33,13 @@ export class ServicioMesa {
     return this.mesaActualizada.asObservable()
   }
 
-  addMEsa(mesa: Mesa) {
+  addMesa(mesa: Mesa) {
+    console.log(mesa)
     this.http.post<{message: string}>('http://localhost:3000/api/mesas', mesa)
     .subscribe((responseData) => {
         console.log(responseData)
         this.mesas.push(mesa)
+        console.log(mesa)
         this.mesaActualizada.next([...this.mesas])
     })
   }

@@ -10,8 +10,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component'
 import { HeaderComponent } from './header/header.component';
 import { TabsComponent } from './tabs/tabs.component'
+
 import { CrearCamareroComponent } from './secciones/camareros/crear-camarero/crear-camarero.component';
 import { ListarCamareroComponent } from './secciones/camareros/listar-camarero/listar-camareros.component';
+
+import { CrearMesaComponent } from './secciones/mesas/crear-mesa/crear-mesa.component';
 import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.component'
 
 @NgModule({
@@ -20,9 +23,11 @@ import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.
     HomeComponent,
     HeaderComponent,
     TabsComponent,
+
     CrearCamareroComponent,
     ListarCamareroComponent,
 
+    CrearMesaComponent,
     ListarMesaComponent
   ],
   imports: [
