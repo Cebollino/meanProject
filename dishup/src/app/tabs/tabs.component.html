@@ -1,0 +1,62 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#camareros" data-toggle="tab">Camareros</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#mesas" data-toggle="tab">Mesa</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" data-toggle="tab">Item del menu</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="tab">Pedidos</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="camareros" role="tabpanel" aria-labelledby="camareros-tab">
+        <div class="row mb-2 mt-2">
+          <div class="col-12">
+              <button class="btn-primary" routerLink="/addCamarero">Añadir camarero</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Camareros</h3>
+                </div>
+                <div class="card-body">
+                  <app-listar-camareros></app-listar-camareros>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="mesas" role="tabpanel" aria-labelledby="mesas-tab">
+          <div class="row mb-2 mt-2">
+              <div class="col-12">
+                  <button class="btn-primary" routerLink="/addMEsa">Añadir mesa</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Mesas</h3>
+                    </div>
+                    <div class="card-body">
+                      <app-listar-mesas></app-listar-mesas>
+                    </div>
+                    <div class="card-footer"></div>
+                  </div>
+              </div>
+            </div>
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+  </div>
+
+    <!-- <div class="tab-content">
+      <div *ngIf="tabSelecionada === tabs[0]" role="tabpanel" class="tab-pane active" id="one">tab 1 content</div>
+      <div *ngIf="tabSelecionada === tabs[1]" role="tabpanel" class="tab-pane active" id="two">tab 2 content</div>
+    </div> -->

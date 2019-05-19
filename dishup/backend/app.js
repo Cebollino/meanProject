@@ -30,23 +30,25 @@ app.use((req, res, next) => {
     next()
 })
 
-app.post("/api/camarero", (req, res, next) => {
+app.post("/api/camareros", (req, res, next) => {
     const camarero = new Camarero({
-        title: req.body.title,
-        amount: req.body.amount
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      tlfn: req.body.tlfn,
+      email: req.body.email
     })
     camarero.save()
     console.log(camarero)
     res.status(201).json({
-        message: "Post added"
+        message: "camarero add"
     })
 })
 
-app.get('/api/camarero' , (req, res, next) => {
+app.get('/api/camareros' , (req, res, next) => {
     Camarero.find().then(documents => {
         console.log(documents)
         res.status(200).json({
-            message: "posts done",
+            message: "get de camareros",
             camareros: documents
         })
     })

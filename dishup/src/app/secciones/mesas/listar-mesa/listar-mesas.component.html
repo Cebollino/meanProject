@@ -1,0 +1,16 @@
+<table datatable class="row-border hover">
+    <thead>
+      <tr>
+        <th>Session</th>
+        <th>Camarero</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let mesa of mesas">
+        <td>{{mesa.id_sesion}}</td>
+        <td>{{mesa.id_camarero}}</td>
+        <td>{{mesa.estado}}</td>
+      </tr>
+    </tbody>
+  </table>
