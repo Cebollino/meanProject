@@ -13,7 +13,8 @@
                 id="id_camarero" name="id_camarero"
                 #id_camarero="ngModel" ngModel
                 required>
-                  <option value="esto es una id">Aqui va la ip</option>
+                  <option *ngFor="let camarero of camareros"
+                   value="{{camarero.id}}">{{camarero.nombre}} {{camarero.apellido}}</option>
                 </select>
                 <div class="invalid-feedback"></div>
               </div>

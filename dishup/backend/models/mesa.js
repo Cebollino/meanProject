@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
 
-const schMesa = mongoose.Schema({
+const Schema = mongoose.Schema;
+const Camarero = require('./camarero')
+
+const schMesa = Schema({
     id_sesion: {
         type: String,
         required: true,
         maxlength: 50
     },
     id_camarero: {
-        type: String,
-        required: true,
-        maxlength: 20
+        type: Schema.Types.ObjectId,
+        ref: 'Camarero'
     },
     estado: {
       type: String,

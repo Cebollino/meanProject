@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs'
-import { Camarero } from '../camarero.modelo'
+import { Subscription } from 'rxjs';
+import { Camarero } from '../camarero.modelo';
 import { ServicioCamarero } from '../camarero.service';
 
 @Component({
@@ -9,21 +9,24 @@ import { ServicioCamarero } from '../camarero.service';
 })
 
 export class ListarCamareroComponent implements OnInit, OnDestroy {
-  camareros: Camarero[] = []
+  camareros: Camarero[] = [];
   private camarerosSub: Subscription;
 
   constructor(public servicioCamarero: ServicioCamarero) {}
 
   ngOnInit() {
-      this.servicioCamarero.getCamareros()
-      this.camarerosSub = this.servicioCamarero.getCamarerosActualizadosListener()
-      .subscribe((camareros: Camarero[]) =>{
-          this.camareros = camareros;
-      })
+      this.getCamareros();
+  }
 
+  getCamareros() {
+    this.servicioCamarero.getCamareros();
+    this.camarerosSub = this.servicioCamarero.getCamarerosActualizadosListener()
+      .subscribe((camareros: Camarero[]) => {
+          this.camareros = camareros;
+      });
   }
 
   ngOnDestroy() {
-      this.camarerosSub.unsubscribe()
+      this.camarerosSub.unsubscribe();
   }
 }

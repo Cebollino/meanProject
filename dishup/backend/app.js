@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const Camarero = require("./models/camarero")
 const Mesa = require('./models/mesa')
+
 const app = express()
 
 mongoose.connect("mongodb+srv://albert:RAMFrodo871@cluster0-kceiu.mongodb.net/dishup?retryWrites=true")
