@@ -1,0 +1,18 @@
+<table datatable class="row-border hover">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Descripcion</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let menu of menus">
+      <td><button class="btn btn-primary" [routerLink]="['/editarMenu', menu._id]">{{menu.nombre}}</button></td>
+      <td>{{menu.precio}} €</td>
+      <td>{{menu.descripcion}}</td>
+      <td>{{menu.tipo}}</td>
+    </tr>
+  </tbody>
+</table>

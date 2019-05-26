@@ -15,8 +15,13 @@ import { CrearCamareroComponent } from './secciones/camareros/crear-camarero/cre
 import { ListarCamareroComponent } from './secciones/camareros/listar-camarero/listar-camareros.component';
 
 import { CrearMesaComponent } from './secciones/mesas/crear-mesa/crear-mesa.component';
-import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.component'
+import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.component';
 
+import { CrearMenuComponent } from './secciones/menu/crear-menus/crear-menus.component';
+import { ListarMenuComponent } from './secciones/menu/listar-menus/listar-menus.component';
+
+import { CrearPedidoComponent } from './secciones/pedidos/crear-pedidos/crear-pedidos.component';
+import { ListarPedidoComponent } from './secciones/pedidos/listar-pedidos/listar-pedidos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,13 @@ import { ListarMesaComponent } from './secciones/mesas/listar-mesa/listar-mesas.
     ListarCamareroComponent,
 
     CrearMesaComponent,
-    ListarMesaComponent
+    ListarMesaComponent,
+
+    CrearMenuComponent,
+    ListarMenuComponent,
+
+    CrearPedidoComponent,
+    ListarPedidoComponent
   ],
   imports: [
     BrowserModule,

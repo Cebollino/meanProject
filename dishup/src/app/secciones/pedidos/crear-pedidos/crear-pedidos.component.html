@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Formulario para añadir pedidos</h3>
+      </div>
+      <div class="card-body">
+        <form (submit)="onGuardarPedido(formPedido)" #formPedido="ngForm">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="id_sesion">Id session</label>
+                <select class="form-control"
+                id="id_sesion" name="id_sesion"
+                #id_sesion="ngModel" [ngModel]="pedido?.id_sesion"
+                required>
+                  <option *ngFor="let mesa of mesas"
+                    value="{{mesa.id_sesion}}">{{mesa.id_sesion}}</option>
+                  <option *ngIf="sesionExiste" value="{{pedido?.id_sesion}}">{{pedido?.id_sesion}}</option>
+                  <option *ngIf="mesas.length == 0">NO SESIONES</option>
+                  </select>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="cdg_menu">Item del menu</label>
+                <select class="form-control"
+                id="cdg_menu" name="cdg_menu"
+                #cdg_menu="ngModel" [ngModel]="pedido?.cdg_menu"
+                required>
+                 <option *ngFor="let menu of menus" value="{{menu?.cdg_menu}}">{{menu.nombre}}</option>
+                </select>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+          <button *ngIf="mode == 'editar'" (click)="onDelete(pedido._id)" class="btn btn-danger ml-1" type="submit">Eliminar</button>
+        </form>
+      </div>
+      <div class="card-footer">
+
+      </div>
+    </div>
+  </div>

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tabs',
@@ -6,6 +6,6 @@ import { Component } from "@angular/core";
 })
 
 export class TabsComponent {
-  tabs: string[] = ['Camareros','Mesas', "Item del menu", "Pedidos"];
+  tabs: string[] = ['Camareros','Mesas', 'Menu', 'Pedidos'];
   tabSelecionada = this.tabs[0];
 }

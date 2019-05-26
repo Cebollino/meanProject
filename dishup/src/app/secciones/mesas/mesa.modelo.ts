@@ -1,5 +1,6 @@
 export interface Mesa {
-  id: string;
+  _id: string;
+  num_mesa: number;
   id_sesion: string;
   id_camarero: string;
   estado: string;

@@ -1,27 +1,27 @@
 <div class="container-fluid">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Formulario para añadir camareros</h3>
+      <h3 class="card-title">Formulario para añadir menus</h3>
     </div>
     <div class="card-body">
-      <form (submit)="onGuardarCamarero(formCamarero)" #formCamarero="ngForm">
+      <form (submit)="onGuardarMenu(formMenu)" #formMenu="ngForm">
         <div class="row">
           <div class="col-6">
             <div class="form-group">
               <label for="nombre">Nombre</label>
               <input class="form-control" type="text"
               id="nombre" name="nombre"
-              #nombre="ngModel" [ngModel]="camarero?.nombre"
+              #nombre="ngModel" [ngModel]="menu?.nombre"
               required/>
               <div class="invalid-feedback"></div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="apellido">Apellido</label>
-              <input class="form-control" type="text"
-              id="apellido" name="apellido"
-              #apellido="ngModel" [ngModel]="camarero?.apellido"
+              <label for="precio">Precio</label>
+              <input class="form-control" type="number"
+              id="precio" name="precio"
+              #precio="ngModel" [ngModel]="menu?.precio"
               required/>
               <div class="invalid-feedback"></div>
             </div>
@@ -30,27 +30,30 @@
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="tlfn">Telefono</label>
-              <input class="form-control" type="tel"
-              id="tlfn" name="tlfn"
-              #tlfn="ngModel" [ngModel]="camarero?.tlfn"
-              required/>
+              <label for="descripcion">Descripcion</label>
+              <textarea class="form-control" rows="3"
+              id="descripcion" name="descripcion" maxlength="100"
+              #descripcion="ngModel" [ngModel]="menu?.descripcion"
+              required></textarea>
               <div class="invalid-feedback"></div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="email">Email</label>
-              <input class="form-control" type="email"
-              id="email" name="email"
-              #email="ngModel" [ngModel]="camarero?.email"
-              required/>
+              <label for="tipo">Tipo</label>
+              <select class="form-control"
+                id="tipo" name="tipo"
+                #tipo="ngModel" [ngModel]="menu?.tipo"
+                required>
+                  <option value="bebida">Bebida</option>
+                  <option value="comida">Comida</option>
+                </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
         </div>
         <button class="btn btn-primary" type="submit">Guardar</button>
-        <button *ngIf="mode == 'editar'" (click)="onDelete(camarero._id)" class="btn btn-danger ml-1" type="submit">Eliminar</button>
+        <button *ngIf="mode == 'editar'" (click)="onDelete(menu._id)" class="btn btn-danger ml-1" type="submit">Eliminar</button>
       </form>
     </div>
     <div class="card-footer">

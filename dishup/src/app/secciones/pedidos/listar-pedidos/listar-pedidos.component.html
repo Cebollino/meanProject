@@ -1,0 +1,22 @@
+<table datatable class="row-border hover">
+  <thead>
+    <tr>
+      <th>Codigo pedido</th>
+      <th>Numero de mesa</th>
+      <th>Session</th>
+      <th>Camarero</th>
+      <th>CDG Menu</th>
+      <th>Precio Menu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let pedido of pedidos">
+      <td><button class="btn btn-primary" [routerLink]="['/editarPedido', pedido._id]">{{pedido.cdg_pedido}}</button></td>
+      <td>{{pedido.num_mesa}}</td>
+      <td>{{pedido.id_sesion}}</td>
+      <td><button class="btn btn-primary" [routerLink]="['/editarCamarero', pedido.id_camarero]">{{pedido.id_camarero}}</button></td>
+      <td>{{pedido.cdg_menu}}</td>
+      <td>{{pedido.precio_menu}}</td>
+    </tr>
+  </tbody>
+</table>
