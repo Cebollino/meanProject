@@ -15,7 +15,7 @@
                 required>
                   <option *ngFor="let camarero of camareros"
                    value="{{camarero._id}}">{{camarero.nombre}} {{camarero.apellido}}</option>
-                   <option *ngIf="camareroExistia" value="{{mesa?._id}}">{{mesa?._id}}</option>
+                   <option *ngIf="camareroExiste" value="{{mesa?._id}}">{{mesa?._id}}</option>
                    <option *ngIf="camareros.length == 0">NO CAMAREROS</option>
                 </select>
                 <div class="invalid-feedback"></div>
