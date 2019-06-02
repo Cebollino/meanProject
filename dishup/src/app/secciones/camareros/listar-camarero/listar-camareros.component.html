@@ -1,20 +1,18 @@
-<table datatable class="row-border hover">
+<table id="camarero-table" class="table table-hover">
   <thead>
     <tr>
       <th>Nombre</th>
       <th>Apellidos</th>
       <th>Telefono</th>
       <th>Email</th>
-      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor = "let camarero of camareros">
-      <td>{{camarero.nombre}}</td>
+      <td><button class="btn btn-primary" [routerLink]="['/editarCamarero', camarero._id]">{{camarero.nombre}}</button></td>
       <td>{{camarero.apellido}}</td>
       <td>{{camarero.tlfn}}</td>
       <td>{{camarero.email}}</td>
-      <td><button class="btn btn-primary" [routerLink]="['/editarCamarero', camarero._id]">Editar</button> </td>
     </tr>
   </tbody>
 </table>

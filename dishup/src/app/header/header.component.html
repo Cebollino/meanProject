@@ -8,11 +8,20 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="usuarioLoggedIn" class="nav-item">
         <a class="nav-link" routerLink="/tabs">Tableros</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="!usuarioLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/login">Log In</a>
+      </li>
+      <li *ngIf="!usuarioLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/signup">Sign Up</a>
+      </li>
+      <li *ngIf="usuarioLoggedIn" class="nav-item">
         <a class="nav-link" href="#">Logs</a>
+      </li>
+      <li *ngIf="usuarioLoggedIn" class="nav-item">
+          <button class="nav-link" (click)="onLogout()">Log out</button>
       </li>
     </ul>
   </div>

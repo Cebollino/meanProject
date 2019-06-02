@@ -60,7 +60,6 @@ export class CrearMenuComponent {
 
     if (this.mode === 'create') {
       this.servicioMenu.addMenu(menu);
-      form.resetForm();
     } else {
       this.servicioMenu.actualizarMenu(this._id, menu);
     }

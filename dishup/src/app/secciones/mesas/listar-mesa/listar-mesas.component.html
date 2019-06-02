@@ -1,18 +1,18 @@
-<table datatable class="row-border hover">
-    <thead>
-      <tr>
-        <th>Numero de mesa</th>
-        <th>Session</th>
-        <th>Camarero</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor = "let mesa of mesas">
-        <td><button class="btn btn-primary" [routerLink]="['/editarMesa', mesa._id]">{{mesa.num_mesa}}</button></td>
-        <td>{{mesa.id_sesion}}</td>
-        <td>{{mesa.id_camarero}}</td>
-        <td>{{mesa.estado}}</td>
-      </tr>
-    </tbody>
-  </table>
+<table id="mesa-table" class="table table-hover">
+  <thead>
+    <tr>
+      <th>Numero de mesa</th>
+      <th>Session</th>
+      <th>Camarero</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let mesa of mesas">
+      <td><button class="btn btn-primary" [routerLink]="['/editarMesa', mesa._id]">{{mesa.num_mesa}}</button></td>
+      <td>{{mesa.id_sesion}}</td>
+      <td>{{mesa.id_camarero}}</td>
+      <td>{{mesa.estado}}</td>
+    </tr>
+  </tbody>
+</table>

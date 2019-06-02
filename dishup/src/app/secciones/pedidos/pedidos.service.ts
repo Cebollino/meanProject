@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ServicioPedido {
   private pedidos: Pedido[] = [];
   private pedidoActualizado = new Subject<Pedido[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getPedidos() {
-    this.http.get<{message: string, pedidos: any}>('http://localhost:3000/api/pedidos/')
+    this.http.get<{mensaje: string, pedidos: any}>('http://localhost:3000/api/pedidos/')
     .pipe(map((pedidoData) => {
       return pedidoData.pedidos.map(pedido => {
         return {
@@ -52,12 +53,15 @@ export class ServicioPedido {
 
   addPedido(pedido: Pedido) {
     console.log(pedido);
-    this.http.post<{message: string}>('http://localhost:3000/api/pedidos/', pedido)
-    .subscribe((responseData) => {
-        console.log(responseData);
-        this.pedidos.push(pedido);
-        console.log(pedido);
-        this.pedidoActualizado.next([...this.pedidos]);
+    this.http.post<{mensaje: string, _id: string}>('http://localhost:3000/api/pedidos/', pedido)
+    .subscribe((response) => {
+        console.log(response);
+        if (response.mensaje === "200"){
+          this.pedidos.push(pedido);
+          console.log(pedido);
+          this.pedidoActualizado.next([...this.pedidos]);
+          this.router.navigate(['/editarPedido/' + response._id])
+        }
     });
   }
 
@@ -83,11 +87,15 @@ export class ServicioPedido {
   }
 
   eliminarPedido(_id: string) {
-    this.http.delete('http://localhost:3000/api/pedidos/' + _id)
-    .subscribe(() => {
-      const pedidosActualizadas = this.pedidos.filter(pedido => pedido._id !== _id);
-      this.pedidos = pedidosActualizadas;
-      this.pedidoActualizado.next([...this.pedidos]);
+    console.log(_id)
+    this.http.delete<{mensaje: string}>('http://localhost:3000/api/pedidos/' + _id)
+    .subscribe((response) => {
+      if (response.mensaje === "200") {
+        const pedidosActualizadas = this.pedidos.filter(pedido => pedido._id !== _id);
+        this.pedidos = pedidosActualizadas;
+        this.pedidoActualizado.next([...this.pedidos]);
+        this.router.navigate(['/tabs']);
+      }
     });
   }
 }

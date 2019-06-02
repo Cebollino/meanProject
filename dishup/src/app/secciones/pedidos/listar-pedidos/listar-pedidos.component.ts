@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Pedido } from '../pedidos.modelo';
 import { ServicioPedido } from '../pedidos.service';
@@ -20,10 +20,9 @@ export class ListarPedidoComponent implements OnInit, OnDestroy {
   camareros: Camarero[] = [];
 
   private pedidosSub: Subscription;
-  private mesasSub: Subscription;
-  private camareroSub: Subscription;
-
-  constructor(public servicioPedido: ServicioPedido, public servicioMesa: ServicioMesa, public servicioCamarero: ServicioCamarero) {}
+  private dataTable;
+  private dtOptions: any;
+  constructor(public servicioPedido: ServicioPedido, private chRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getPedidos();
@@ -33,8 +32,24 @@ export class ListarPedidoComponent implements OnInit, OnDestroy {
     this.servicioPedido.getPedidos();
     this.pedidosSub = this.servicioPedido.getPedidosActualizadasListener()
       .subscribe((pedidos: Pedido[]) => {
-        console.log(pedidos)
+        console.log(pedidos);
         this.pedidos = pedidos;
+
+        this.chRef.detectChanges();
+
+        const table = $('#pedidos-table');
+        this.dtOptions = {
+          dom: 'Bfrtip',
+          // Configure the buttons
+          buttons: [
+            'copy',
+            'print',
+            'csv',
+            'pdf',
+            'excel',
+          ]
+        };
+        this.dataTable = table.DataTable(this.dtOptions);
       });
   }
   ngOnDestroy() {

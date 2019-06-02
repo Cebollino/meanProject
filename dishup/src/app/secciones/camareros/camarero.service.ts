@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ServicioCamarero {
   private camareros: Camarero[] = []
   private camareroActalizado = new Subject<Camarero[]>()
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getCamareros() {
-    this.http.get<{message: string, camareros: any}>('http://localhost:3000/api/camareros')
+    this.http.get<{mensaje: string, camareros: any}>('http://localhost:3000/api/camareros')
     .pipe(map((camareroData) => {
       return camareroData.camareros.map(camarero => {
         return {
@@ -58,20 +59,29 @@ export class ServicioCamarero {
   }
 
   addCamarero(camarero: Camarero) {
-    this.http.post<{message: string}>('http://localhost:3000/api/camareros', camarero)
-    .subscribe((responseData) => {
-        console.log(responseData)
-        this.camareros.push(camarero)
-        this.camareroActalizado.next([...this.camareros])
+    this.http.post<any>('http://localhost:3000/api/camareros', camarero)
+    .subscribe((response) => {
+        console.log(response)
+
+        if (response.mensaje === '200') {
+          this.camareros.push(camarero)
+          this.camareroActalizado.next([...this.camareros])
+          this.router.navigate(['/editarCamarero/'+response._id])
+        } else {
+          alert(response.message)
+        }
     })
   }
 
   eliminarCamarero(_id: string){
-    this.http.delete('http://localhost:3000/api/camareros/' + _id)
-    .subscribe(() => {
-      const camarerosActuliazados = this.camareros.filter(mesa => mesa._id !== _id);
-      this.camareros = camarerosActuliazados;
-      this.camareroActalizado.next([...this.camareros]);
+    this.http.delete<{mensaje: string}>('http://localhost:3000/api/camareros/' + _id)
+    .subscribe((response) => {
+      if (response.mensaje === '200'){
+          const camarerosActuliazados = this.camareros.filter(mesa => mesa._id !== _id);
+          this.camareros = camarerosActuliazados;
+          this.camareroActalizado.next([...this.camareros]);
+          this.router.navigate(['/tabs'])
+      }
     })
   }
 }

@@ -74,7 +74,6 @@ export class CrearMesaComponent implements OnInit, OnDestroy {
       console.log(mesa);
       this.servicioMesa.actualizarMesa(this._id, mesa);
     }
-    form.resetForm();
   }
 
   getCamareros() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Mesa } from '../mesa.modelo';
 import { ServicioMesa } from '../mesa.service';
@@ -15,13 +15,12 @@ export class ListarMesaComponent implements OnInit, OnDestroy {
   camareros: Camarero[] = [];
 
   private mesasSub: Subscription;
-  private camareroSub: Subscription;
+  private dataTable;
 
-  constructor(public servicioMesa: ServicioMesa, public servicioCamarero: ServicioCamarero) {}
+  constructor(public servicioMesa: ServicioMesa, public servicioCamarero: ServicioCamarero, private chRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getMesas();
-    this.getCamareros();
   }
 
   getMesas() {
@@ -29,16 +28,14 @@ export class ListarMesaComponent implements OnInit, OnDestroy {
     this.mesasSub = this.servicioMesa.getMesasActualizadasListener()
       .subscribe((mesas: Mesa[]) => {
           this.mesas = mesas;
+
+          this.chRef.detectChanges();
+
+          const table = $('#mesa-table');
+          this.dataTable = table.DataTable();
       });
   }
 
-  getCamareros() {
-    this.servicioCamarero.getCamareros();
-    this.camareroSub = this.servicioCamarero.getCamarerosActualizadosListener()
-      .subscribe((camareros: Camarero[]) => {
-          this.camareros = camareros;
-      });
-  }
   ngOnDestroy() {
       this.mesasSub.unsubscribe();
   }

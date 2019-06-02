@@ -16,6 +16,10 @@ import { CrearMenuComponent } from './secciones/menu/crear-menus/crear-menus.com
 import { ListarPedidoComponent } from './secciones/pedidos/listar-pedidos/listar-pedidos.component';
 import { CrearPedidoComponent } from './secciones/pedidos/crear-pedidos/crear-pedidos.component';
 
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -23,61 +27,83 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    component: TabsComponent
+    component: TabsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'listCamareros',
-    component: ListarCamareroComponent
+    component: ListarCamareroComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editarCamarero/:id',
-    component: CrearCamareroComponent
+    component: CrearCamareroComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addCamarero',
-    component: CrearCamareroComponent
+    component: CrearCamareroComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'listMesas',
-    component: ListarMesaComponent
+    component: ListarMesaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editarMesa/:id',
-    component: CrearMesaComponent
+    component: CrearMesaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addMesa',
-    component: CrearMesaComponent
+    component: CrearMesaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'listMenu',
-    component: ListarMenuComponent
+    component: ListarMenuComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editarMenu/:id',
-    component: CrearMenuComponent
+    component: CrearMenuComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addMenu',
-    component: CrearMenuComponent
+    component: CrearMenuComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'listPedidos',
-    component: ListarPedidoComponent
+    component: ListarPedidoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editarPedido/:id',
-    component: CrearPedidoComponent
+    component: CrearPedidoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addPedido',
-    component: CrearPedidoComponent
-  }
-]
+    component: CrearPedidoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+   component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 
 

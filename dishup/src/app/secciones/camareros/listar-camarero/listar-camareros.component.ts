@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
 import { Camarero } from '../camarero.modelo';
 import { ServicioCamarero } from '../camarero.service';
 
@@ -11,11 +11,12 @@ import { ServicioCamarero } from '../camarero.service';
 export class ListarCamareroComponent implements OnInit, OnDestroy {
   camareros: Camarero[] = [];
   private camarerosSub: Subscription;
-
-  constructor(public servicioCamarero: ServicioCamarero) {}
+  public dataTable;
+  public dtOptions: any = {};
+  constructor(public servicioCamarero: ServicioCamarero, private chRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-      this.getCamareros();
+    this.getCamareros();
   }
 
   getCamareros() {
@@ -23,6 +24,23 @@ export class ListarCamareroComponent implements OnInit, OnDestroy {
     this.camarerosSub = this.servicioCamarero.getCamarerosActualizadosListener()
       .subscribe((camareros: Camarero[]) => {
           this.camareros = camareros;
+
+          this.chRef.detectChanges();
+
+          const table = $('#camarero-table');
+          this.dtOptions = {
+            dom: 'Bfrtip',
+            // Configure the buttons
+            buttons: [
+              'copy',
+              'print',
+              'csv',
+              'excel',
+              'pdf'
+            ]
+          };
+
+          this.dataTable = table.DataTable(this.dtOptions);
       });
   }
 

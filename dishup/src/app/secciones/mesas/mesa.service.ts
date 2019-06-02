@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ServicioMesa {
   private mesas: Mesa[] = [];
   private mesaActualizada = new Subject<Mesa[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getMesas() {
-    this.http.get<{message: string, mesas: any}>('http://localhost:3000/api/mesas/')
+    this.http.get<{mensaje: string, mesas: any}>('http://localhost:3000/api/mesas/')
     .pipe(map((mesaData) => {
       return mesaData.mesas.map(mesa => {
         return {
@@ -41,12 +42,15 @@ export class ServicioMesa {
 
   addMesa(mesa: Mesa) {
     console.log(mesa);
-    this.http.post<{message: string}>('http://localhost:3000/api/mesas/', mesa)
-    .subscribe((responseData) => {
-        console.log(responseData);
-        this.mesas.push(mesa);
-        console.log(mesa);
-        this.mesaActualizada.next([...this.mesas]);
+    this.http.post<{mensaje: string, _id: string}>('http://localhost:3000/api/mesas/', mesa)
+    .subscribe((response) => {
+        console.log(response);
+        if (response.mensaje === '200') {
+          this.mesas.push(mesa);
+          console.log(mesa);
+          this.mesaActualizada.next([...this.mesas]);
+          this.router.navigate(['editarMesa/' + response._id]);
+        }
     });
   }
 
@@ -58,7 +62,7 @@ export class ServicioMesa {
       id_camarero: mesa.id_camarero,
       estado: mesa.estado
     };
-    console.log(mesa)
+    console.log(mesa);
     this.http.put('http://localhost:3000/api/mesas/' + _id, mesaEdit)
     .subscribe(response => {
       const mesasActializadas = [...this.mesas];
@@ -70,11 +74,14 @@ export class ServicioMesa {
   }
 
   eliminarMesa(_id: string){
-    this.http.delete('http://localhost:3000/api/mesas/' + _id)
-    .subscribe(() => {
-      const mesasActualizadas = this.mesas.filter(mesa => mesa._id !== _id);
-      this.mesas = mesasActualizadas;
-      this.mesaActualizada.next([...this.mesas]);
-    })
+    this.http.delete<{mensaje: string}>('http://localhost:3000/api/mesas/' + _id)
+    .subscribe((response) => {
+      if (response.mensaje === '200') {
+        const mesasActualizadas = this.mesas.filter(mesa => mesa._id !== _id);
+        this.mesas = mesasActualizadas;
+        this.mesaActualizada.next([...this.mesas]);
+        this.router.navigate(['/tabs']);
+      }
+    });
   }
 }

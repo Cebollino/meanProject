@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ServicioMenu {
   private menus: Menu[] = [];
   private menuActualizado = new Subject<Menu[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getMenus() {
-    this.http.get<{message: string, menus: any}>('http://localhost:3000/api/menus')
+    this.http.get<{mensaje: string, menus: any}>('http://localhost:3000/api/menus')
     .pipe(map((menuData) => {
       return menuData.menus.map(menu => {
         return {
@@ -61,20 +62,28 @@ export class ServicioMenu {
 
   addMenu(menu: Menu) {
     console.log(menu)
-    this.http.post<{message: string}>('http://localhost:3000/api/menus', menu)
-    .subscribe((responseData) => {
-        console.log(responseData);
-        this.menus.push(menu);
-        this.menuActualizado.next([...this.menus]);
+    this.http.post<any>('http://localhost:3000/api/menus', menu)
+    .subscribe((response) => {
+        console.log(response);
+        if (response.mensaje == "200"){
+          this.menus.push(menu);
+          this.menuActualizado.next([...this.menus]);
+          this.router.navigate(['/editarMenu/'+response._id])
+        } else {
+          alert(response.message)
+        }
     });
   }
 
   eliminarMenu(_id: string){
-    this.http.delete('http://localhost:3000/api/menus/' + _id)
-    .subscribe(() => {
-      const menusActuliazados = this.menus.filter(mesa => mesa._id !== _id);
-      this.menus = menusActuliazados;
-      this.menuActualizado.next([...this.menus]);
+    this.http.delete<{mensaje: string}>('http://localhost:3000/api/menus/' + _id)
+    .subscribe((response) => {
+      if (response.mensaje == "200") {
+        const menusActuliazados = this.menus.filter(mesa => mesa._id !== _id);
+        this.menus = menusActuliazados;
+        this.menuActualizado.next([...this.menus]);
+        this.router.navigate(['/tabs'])
+      }
     });
   }
 }

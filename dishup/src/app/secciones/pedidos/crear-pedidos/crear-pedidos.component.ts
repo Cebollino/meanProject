@@ -92,7 +92,6 @@ export class CrearPedidoComponent implements OnInit, OnDestroy {
       console.log(pedido);
       this.servicioPedido.actualizarPedido(this._id, pedido);
     }
-    form.resetForm();
   }
 
   getMesas() {
