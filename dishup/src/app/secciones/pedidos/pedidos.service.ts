@@ -56,7 +56,7 @@ export class ServicioPedido {
     this.http.post<{mensaje: string, _id: string}>('http://localhost:3000/api/pedidos/', pedido)
     .subscribe((response) => {
         console.log(response);
-        if (response.mensaje === "200"){
+        if (response.mensaje === '200'){
           this.pedidos.push(pedido);
           console.log(pedido);
           this.pedidoActualizado.next([...this.pedidos]);
@@ -90,7 +90,7 @@ export class ServicioPedido {
     console.log(_id)
     this.http.delete<{mensaje: string}>('http://localhost:3000/api/pedidos/' + _id)
     .subscribe((response) => {
-      if (response.mensaje === "200") {
+      if (response.mensaje === '200') {
         const pedidosActualizadas = this.pedidos.filter(pedido => pedido._id !== _id);
         this.pedidos = pedidosActualizadas;
         this.pedidoActualizado.next([...this.pedidos]);

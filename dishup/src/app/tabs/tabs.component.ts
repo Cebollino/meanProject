@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 
 export class TabsComponent {
-  tabs: string[] = ['Camareros','Mesas', 'Menu', 'Pedidos'];
+  tabs: string[] = ['Camareros', 'Mesas', 'Menu', 'Pedidos'];
   tabSelecionada = this.tabs[0];
 }
