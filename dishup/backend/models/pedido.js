@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
-const Camarero = require('./camarero')
-const Mesa = require('./mesa')
 
 const schPedido = Schema({
   cdg_pedido : {
