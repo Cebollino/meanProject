@@ -30,7 +30,7 @@
     "datatables.net-buttons-dt": "^1.5.6",
     "datatables.net-dt": "^1.10.19",
     "express": "^4.17.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "jszip": "^3.2.1",
     "mongoose": "^5.5.9",
